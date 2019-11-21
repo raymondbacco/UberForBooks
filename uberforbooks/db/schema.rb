@@ -10,7 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_004459) do
+ActiveRecord::Schema.define(version: 2019_11_21_073432) do
+
+  create_table "books", force: :cascade do |t|
+    t.string "name"
+    t.integer "owner_id", null: false
+    t.string "genre"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_id"], name: "index_books_on_owner_id"
+  end
+
+  create_table "project_users", force: :cascade do |t|
+    t.string "name"
+    t.integer "owns_id", null: false
+    t.integer "rented_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owns_id"], name: "index_project_users_on_owns_id"
+    t.index ["rented_id"], name: "index_project_users_on_rented_id"
+  end
+
+  create_table "renteds", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "book_id", null: false
+    t.integer "renter_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_renteds_on_book_id"
+    t.index ["renter_id"], name: "index_renteds_on_renter_id"
+    t.index ["user_id"], name: "index_renteds_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "user_id", null: false
+    t.string "reviews"
+    t.integer "rating"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_reviews_on_book_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -20,8 +61,19 @@ ActiveRecord::Schema.define(version: 2019_11_21_004459) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "bio"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "books", "owners"
+  add_foreign_key "project_users", "owns", column: "owns_id"
+  add_foreign_key "project_users", "renteds"
+  add_foreign_key "renteds", "books"
+  add_foreign_key "renteds", "renters"
+  add_foreign_key "renteds", "users"
+  add_foreign_key "reviews", "books"
+  add_foreign_key "reviews", "users"
 end

@@ -11,8 +11,8 @@ require 'faker'
 10.times do |index|
   User.create!(first_name: Faker::Name.first_name,
                     last_name: Faker::Name.last_name,
-                    bio: Faker::HarryPotter.quote,
+                    bio: Faker::Movies::HarryPotter.quote,
                     email: Faker::Internet.email,
-                    encrypted_password: Faker::Internet.password
+                    password: Faker::Internet.password
                     )
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_073432) do
+ActiveRecord::Schema.define(version: 2019_12_02_221318) do
 
   create_table "books", force: :cascade do |t|
     t.string "name"
@@ -18,17 +18,8 @@ ActiveRecord::Schema.define(version: 2019_11_21_073432) do
     t.string "genre"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "location"
     t.index ["owner_id"], name: "index_books_on_owner_id"
-  end
-
-  create_table "project_users", force: :cascade do |t|
-    t.string "name"
-    t.integer "owns_id", null: false
-    t.integer "rented_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["owns_id"], name: "index_project_users_on_owns_id"
-    t.index ["rented_id"], name: "index_project_users_on_rented_id"
   end
 
   create_table "renteds", force: :cascade do |t|
@@ -69,8 +60,6 @@ ActiveRecord::Schema.define(version: 2019_11_21_073432) do
   end
 
   add_foreign_key "books", "owners"
-  add_foreign_key "project_users", "owns", column: "owns_id"
-  add_foreign_key "project_users", "renteds"
   add_foreign_key "renteds", "books"
   add_foreign_key "renteds", "renters"
   add_foreign_key "renteds", "users"

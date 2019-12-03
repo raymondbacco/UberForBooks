@@ -10,11 +10,13 @@ require 'faker'
 
 
 # fake users
+locs = ["Moffit", "Evans Hall", "Sodoi Coffee", "Soda Hall", "Cory Hall", "VLSH"]
 10.times do |index|
   User.create!(first_name: Faker::Name.first_name,
                     last_name: Faker::Name.last_name,
                     bio: Faker::Movies::HarryPotter.quote,
                     email: Faker::Internet.email,
+                    location: locs.sample,
                     password: Faker::Internet.password
                     )
 end
@@ -23,11 +25,9 @@ end
 # fake books
 book_name = ["Algorithm", "Data Structure", "Machine Learning"]
 genre = ["CS", "EE", "ECO", "MATH", "CHEM", "PHY", "ART"]
-locs = ["Moffit", "Evans Hall", "Sodoi Coffee", "Soda Hall", "Cory Hall", "VLSH"]
 10.times do |index|
   Book.create!(name: book_name.sample,
                     genre: genre.sample,
-                    location: locs.sample,
                     user_id: User.all.sample.id
                     )
 end

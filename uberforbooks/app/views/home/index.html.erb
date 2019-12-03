@@ -16,6 +16,7 @@ Bootstrap used here
 		Genre:
 		<%= book.genre %>		
 	</div>
+	<%= button_to "Detail", detail_path(id: book), :class => "button medium", :method => :patch %>
 
 </div>
 <% end %>

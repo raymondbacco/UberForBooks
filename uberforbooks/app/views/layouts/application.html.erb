@@ -1,23 +1,31 @@
-<body>
-  <header>
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key='+Rails.application.credentials.google_maps_api_key %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield(:head_tags) %>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <font size="20" face="verdana" color="red">UberForBookS</font>
+        <% if user_signed_in? %>
+          <p class="info">
+              Logged in as <strong><%= current_user.email %></strong>.
+          </p>
+
+          <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+  	<h4>Your Books for Rent</h4>
+
+        <% else %>
+          <%= link_to "Sign up", new_user_registration_path  %>
+          <%= link_to "Login", new_user_session_path %>
+        <% end %>
+      </div>
+
+    </header>
     <div class="container">
-      <font size="20" face="verdana" color="red">UberForBookS</font> 
-      <% if user_signed_in? %>
-        <p class="info">
-            Logged in as <strong><%= current_user.email %></strong>.
-        </p>
-
-        <%= button_to "Logout", destroy_user_session_path, method: :delete %> 
-	<h4>Your Books for Rent</h4>      
-           
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path  %>
-        <%= link_to "Login", new_user_session_path %>
-      <% end %>
+      <%= yield %>
     </div>
-
-  </header>
-  <div class="container">
-    <%= yield %>
-  </div>
-</body>
+  </body>
+</html>

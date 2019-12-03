@@ -21,10 +21,11 @@ end
 
 
 # fake books
+book_name = ["Algorithm", "Data Structure", "Machine Learning"]
 genre = ["CS", "EE", "ECO", "MATH", "CHEM", "PHY", "ART"]
 locs = ["Moffit", "Evans Hall", "Sodoi Coffee", "Soda Hall", "Cory Hall", "VLSH"]
 10.times do |index|
-  Book.create!(name: Faker::Lorem.words,
+  Book.create!(name: book_name.sample,
                     genre: genre.sample,
                     location: locs.sample,
                     user_id: User.all.sample.id

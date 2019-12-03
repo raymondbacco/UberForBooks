@@ -5,16 +5,23 @@ Bootstrap used here
 <h1>Home</h1>
 <p>Find me in app/views/home/index.html.erb</p>
 
-
 <% @books.each do |book| %>
 <div class="container">
-	<div class="col" style="background: green">
+	<div class="col" style="background: green; margin-top: 50px">
 		Book Name:
 		<%= book.name %>
 	</div>
-	<div class="col" style="margin-bottom: 50px">
+	<div class="col" style="margin-bottom: 5px">
 		Genre:
 		<%= book.genre %>		
+	</div>
+	<div class="col" style="margin-bottom: 5px">
+		Owner:
+		<%=@users.find(book.user_id).first_name + ' '+ @users.find(book.user_id).last_name%>
+	</div>
+	<div class="col" style="margin-bottom: 5px">
+		Location:
+		<%= link_to @users.find(book.user_id).location, map_path %>
 	</div>
 	<%= button_to "Detail", detail_path(id: book), :class => "button medium", :method => :patch %>
 

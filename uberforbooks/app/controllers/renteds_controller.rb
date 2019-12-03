@@ -71,4 +71,5 @@ class RentedsController < ApplicationController
     def rented_params
       params.require(:rented).permit(:user_id, :book_id, :renter_id)
     end
+
 end

@@ -15,8 +15,8 @@
           </p>
 
         <%= button_to "Logout", destroy_user_session_path, method: :delete %> 
-        <%= current_user =%>
-        <%= button_to "profile", profile_path(id: @current_user ), method: :get %> 
+        <!-- <%= current_user =%> -->
+        <%= button_to "profile", root_path, method: :get %>
 	<h4>Your Books for Rent</h4>      
            
       <% else %>

@@ -23,7 +23,7 @@ Bootstrap used here
 		Location:
 		<%= link_to @users.find(book.user_id).location, map_path %>
 	</div>
-	<%= button_to "Detail", detail_path(id: book), :class => "button medium", :method => :patch %>
-
+	<%= button_to "Details", root_path, method: :get %>
+        <%= button_to "Rent This Book", root_path, method: :get %>
 </div>
 <% end %>

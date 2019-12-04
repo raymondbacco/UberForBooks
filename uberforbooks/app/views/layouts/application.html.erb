@@ -14,14 +14,16 @@
               Logged in as <strong><%= current_user.email %></strong>.
           </p>
 
-          <%= button_to "Logout", destroy_user_session_path, method: :delete %>
-  	<h4>Your Books for Rent</h4>
-
-        <% else %>
-          <%= link_to "Sign up", new_user_registration_path  %>
-          <%= link_to "Login", new_user_session_path %>
-        <% end %>
-      </div>
+        <%= button_to "Logout", destroy_user_session_path, method: :delete %> 
+        <%= current_user =%>
+        <%= button_to "profile", profile_path(id: @current_user ), method: :get %> 
+	<h4>Your Books for Rent</h4>      
+           
+      <% else %>
+        <%= link_to "Sign up", new_user_registration_path  %>
+        <%= link_to "Login", new_user_session_path %>
+      <% end %>
+    </div>
 
     </header>
     <div class="container">

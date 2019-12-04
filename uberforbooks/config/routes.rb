@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :renteds
   resources :books
   resources :reviews
-  resources :project_users
+  # resources :users
   root to: "home#index"
   get 'books/show', as:'detail'
   get 'home/index'
@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   devise_for :users do
     get '/users/sign_out', to: 'devise/sessions#destroy'
   end
+
+  get '/users/show', as: 'profile'
+  get '/users/map', as: 'map'
 end

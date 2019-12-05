@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/javascript?key='+Rails.application.credentials.google_maps_api_key %>
+    <%#= javascript_include_tag 'https://maps.googleapis.com/maps/api/javascript?key='+Rails.application.credentials.google_maps_api_key %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= yield(:head_tags) %>
   </head>
@@ -15,10 +15,20 @@
           </p>
 
         <%= button_to "Logout", destroy_user_session_path, method: :delete %> 
-        <!-- <%= current_user =%> -->
+         <%#= current_user =%>
         <%= button_to "profile", root_path, method: :get %>
-	<h4>Your Books for Rent</h4>      
-           
+	        <h4>Your Books Rented</h4>
+          <% current_user.renteds.each do |rented| %>
+            <% puts "I am here" %>
+
+            <% puts rented["book_id"] %>
+            <div class="container">
+              <div class="col" style="background: green; margin-top: 50px">
+                Book Name:
+                <%= Book.find_by_id(rented["book_id"]).name %>
+              </div>
+            </div>
+          <% end %>
       <% else %>
         <%= link_to "Sign up", new_user_registration_path  %>
         <%= link_to "Login", new_user_session_path %>

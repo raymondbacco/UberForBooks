@@ -24,17 +24,13 @@ class RentedsController < ApplicationController
   # POST /renteds
   # POST /renteds.json
   def create
-    @rented = Rented.new(rented_params)
-
-    respond_to do |format|
-      if @rented.save
-        format.html { redirect_to @rented, notice: 'Rented was successfully created.' }
-        format.json { render :show, status: :created, location: @rented }
-      else
-        format.html { render :new }
-        format.json { render json: @rented.errors, status: :unprocessable_entity }
-      end
-    end
+    @rented = Rented.new({:book_id => params["book_id"], :user_id => params["user_id"]})
+    puts "the params"
+    @book = Book.find_by_id(params["book_id"])
+    puts @book.name
+    @book.isRented = true
+    @book.save
+    @rented.save
   end
 
   # PATCH/PUT /renteds/1
@@ -69,7 +65,7 @@ class RentedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rented_params
-      params.require(:rented).permit(:user_id, :book_id, :renter_id)
+      # params.require().permit(:user_id, :book_id)
     end
 
 end

@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 2019_12_03_210747) do
     t.string "name"
     t.integer "user_id", null: false
     t.string "genre"
+    t.string "author"
+    t.boolean "isRented"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_books_on_user_id"
@@ -39,12 +41,12 @@ ActiveRecord::Schema.define(version: 2019_12_03_210747) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "rented_id", null: false
+    t.integer "book_id", null: false
     t.string "reviews"
     t.integer "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["rented_id"], name: "index_reviews_on_rented_id"
+    t.index ["book_id"], name: "index_reviews_on_book_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -66,5 +68,5 @@ ActiveRecord::Schema.define(version: 2019_12_03_210747) do
   add_foreign_key "books", "users"
   add_foreign_key "renteds", "books"
   add_foreign_key "renteds", "users"
-  add_foreign_key "reviews", "renteds"
+  add_foreign_key "reviews", "books"
 end

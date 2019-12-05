@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  resources :places
-  resources :renteds
-  resources :books
-  resources :reviews
+  resources :users do
+    resources :renteds
+  end
+
+  resources :books do
+      resources :reviews
+  end
+
   # resources :users
   root to: "home#index"
   get 'books/show', as:'detail'

@@ -1,5 +1,5 @@
 class Review < ApplicationRecord
-  belongs_to :rented, optional: true
+  belongs_to :book
 
   def self.valid_rating(rating)
   	# 1-5 int by default

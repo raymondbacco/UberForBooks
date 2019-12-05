@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :books
   has_many :renteds
+  has_many :reviews, :through => :books
 end

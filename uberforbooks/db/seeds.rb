@@ -51,9 +51,10 @@ end
 reviews_sample = ["Good book, nice guy", 
 			"Wholesome dude but the book is wasted",
 			"Scam!"]
+
 # fake review
 (rented_times-1).times do |index| # mimic when user don't write a review
-	Review.create!(rented_id: Rented.all[index].id,
+	Review.create!(book_id: Rented.all[index].book_id,
 						reviews: reviews_sample.sample,
 						rating: (1..5).to_a.sample,
 						)

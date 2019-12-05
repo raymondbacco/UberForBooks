@@ -4,6 +4,8 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :name
       t.references :user, null: false, foreign_key: true
       t.string :genre
+      t.string :author
+      t.boolean :isRented
 
       t.timestamps
     end
